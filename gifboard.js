@@ -1,6 +1,13 @@
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    if (Gifs.find().count === 0){
+Gifs = new Meteor.Collection("gifs");
+
+if(Meteor.isClient) {
+    Meteor.subscribe("gifs");
+    Template.gifs_list.gifs = function(){
+        return Gifs.find();
+  };
+}
+Meteor.startup(function () {
+    if (!Gifs.findOne()){
        var data = [
            {
                src: "http://25.media.tumblr.com/tumblr_lyx2ifVyDl1r26bweo1_500.gif",
@@ -29,5 +36,4 @@ if (Meteor.isServer) {
            );
        }
     }
-  });
-}
+    });

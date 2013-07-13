@@ -1,0 +1,16 @@
+<head>
+  <title>GifBoard</title>
+</head>
+
+<body>
+  <h1>Welcome to Gifboard!</h1>
+  {{loginButtons}}
+  {{> gifs_list}}
+</body>
+  <template name="gifs_list">
+    {{#each gifs}}
+      <div class='gif'>
+          <img src={{src}}>
+      </div>
+    {{/each}}
+  </template>

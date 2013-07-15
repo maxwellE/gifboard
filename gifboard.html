@@ -5,12 +5,26 @@
 <body>
   <h1>Welcome to Gifboard!</h1>
   {{loginButtons}}
+  {{> add_gif }}
   {{> gifs_list}}
 </body>
-  <template name="gifs_list">
-    {{#each gifs}}
-      <div class='gif'>
-          <img src={{src}}>
-      </div>
-    {{/each}}
-  </template>
+<template name="gifs_list">
+  {{#each gifs}}
+    <div class='gif'>
+        <img src={{src}}>
+    </div>
+  {{/each}}
+</template>
+<template name="add_gif">
+  {{#if currentUser}}
+    <div id"add_gif">
+      <label for="src">Gif Source Link:</label>
+      <input type='text' name='src' id='src' placeholder='Gif Source'><br>
+      <label for='tags'>Tags:</label>
+      <input type='text' name='tags' id='tags' placeholder='Tags'>
+      <input type='submit' id='submit_gif' value='Create'>
+    </div>
+  {{/if}}
+</template>
+
+

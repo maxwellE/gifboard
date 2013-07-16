@@ -1,9 +1,9 @@
 Meteor.subscribe("gifs");
 Template.add_gif.events({
-    'click #submit_gif': function(e){
+    'click #submit_gif': function(e, template){
         var src,tags,regex;
-        src = document.getElementById("src").value;
-        tags = document.getElementById("tags").value;
+        src = template.find("#src").value;
+        tags = template.find("#tags").value;
         regex = /.+\.gif$/;
         if(regex.test(src)){
               Gifs.insert({
@@ -12,8 +12,8 @@ Template.add_gif.events({
                 tags: prepTags(tags)
               }
            );
-           document.getElementById("src").value = "";
-           document.getElementById("tags").value = "";
+           template.find("#src").value = "";
+           template.find("#tags").value = "";
         }else{
             $('#src').addClass("bad_src");
         }

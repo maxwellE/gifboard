@@ -13,7 +13,7 @@ Template.add_gif.events({
         regex = /.+\.gif$/;
         if(regex.test(src)){
               Gifs.insert({
-                user_id: Meteor.userId,
+                user_id: Meteor.userId(),
                 src: src,
                 tags: prepTags(tags)
               }

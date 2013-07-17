@@ -1,3 +1,9 @@
+Meteor.startup(function() {
+    $(document).ready(function(){
+        $('#tags').tagit();
+    });
+});
+
 Meteor.subscribe("gifs");
 Template.add_gif.events({
     'click #submit_gif': function(e, template){

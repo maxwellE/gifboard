@@ -24,6 +24,10 @@
       <input type='text' name='tags' id='tags' placeholder='Tags'>
       <input type='submit' id='submit_gif' value='Create'>
     </div>
+  {{else}}
+    <div id="not_logged_in">
+        Please log in to add gifs!
+    </div>
   {{/if}}
 </template>
 

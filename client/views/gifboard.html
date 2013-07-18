@@ -6,7 +6,9 @@
   <h1>Welcome to Gifboard!</h1>
   {{loginButtons}}
   {{> add_gif }}
-  {{> gifs_list}}
+  <div id="container" class="js-packery" data-packery-options'{ "itemSelector": ".gif", "gutter": 10}'>
+    {{> gifs_list}}
+  </div>
 </body>
 <template name="gifs_list">
   {{#each gifs}}
@@ -30,5 +32,3 @@
     </div>
   {{/if}}
 </template>
-
-

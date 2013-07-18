@@ -1,6 +1,10 @@
 Meteor.startup(function() {
     $(document).ready(function(){
         $('#tags').tagit();
+        var container = document.querySelector('#container');
+        $('#container').imagesLoaded( function() {
+          pckry = new Packery( container );
+        });
     });
 });
 
@@ -27,8 +31,17 @@ Template.add_gif.events({
   }
 );
 Template.gifs_list.gifs = function(){
-    return Gifs.find();
+    return Gifs.find({}, {sort: {_id: 1}} ).fetch();
 };
+
+Template.gifs_list.rendered = function(){
+    $(document).ready(function(){
+        var container = document.querySelector('#container');
+        $('#container').imagesLoaded( function() {
+          pckry = new Packery( container );
+        });
+    });
+}
 
 function prepTags(tags){
    return _.uniq(_.map(tags.split(','),function(str){ return str.trim();}));

@@ -1,10 +1,6 @@
 Meteor.startup(function() {
     $(document).ready(function(){
         $('#tags').tagit();
-        var container = document.querySelector('#container');
-        $('#container').imagesLoaded( function() {
-          pckry = new Packery( container );
-        });
     });
 });
 

@@ -1,3 +1,9 @@
+Meteor.startup(function() {
+    $(document).ready(function(){
+        $('#tags').tagit();
+    });
+});
+
 Meteor.subscribe("gifs");
 Template.add_gif.events({
     'click #submit_gif': function(e, template){
@@ -7,7 +13,7 @@ Template.add_gif.events({
         regex = /.+\.gif$/;
         if(regex.test(src)){
               Gifs.insert({
-                user_id: Meteor.userId,
+                user_id: Meteor.userId(),
                 src: src,
                 tags: prepTags(tags)
               }
@@ -21,8 +27,17 @@ Template.add_gif.events({
   }
 );
 Template.gifs_list.gifs = function(){
-    return Gifs.find();
+    return Gifs.find({}, {sort: {_id: 1}} ).fetch();
 };
+
+Template.gifs_list.rendered = function(){
+    $(document).ready(function(){
+        var container = document.querySelector('#container');
+        $('#container').imagesLoaded( function() {
+          pckry = new Packery( container );
+        });
+    });
+}
 
 function prepTags(tags){
    return _.uniq(_.map(tags.split(','),function(str){ return str.trim();}));

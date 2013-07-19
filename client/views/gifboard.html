@@ -6,13 +6,13 @@
   <h1>Welcome to Gifboard!</h1>
   {{loginButtons}}
   {{> add_gif }}
-  {{> gifs_list}}
+  <div id="container" class="js-packery" data-packery-options'{ "itemSelector": ".gif", "gutter": 10}'>
+    {{> gifs_list}}
+  </div>
 </body>
 <template name="gifs_list">
   {{#each gifs}}
-    <div class='gif'>
-        <img src={{src}}>
-    </div>
+    <img class='.gif' src={{src}}>
   {{/each}}
 </template>
 <template name="add_gif">
@@ -23,6 +23,10 @@
       <label for='tags'>Tags:</label>
       <input type='text' name='tags' id='tags' placeholder='Tags'>
       <input type='submit' id='submit_gif' value='Create'>
+    </div>
+  {{else}}
+    <div id="not_logged_in">
+        Please log in to add gifs!
     </div>
   {{/if}}
 </template>

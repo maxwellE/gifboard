@@ -3,18 +3,30 @@
 </head>
 
 <body>
-  <h1>Welcome to Gifboard!</h1>
+  <div id="header_div">
+      <h1>Welcome to Gifboard</h1>
+      {{> gifcount}}
+  </div>
+  <a href="https://github.com/maxwellE/gifboard"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
   {{loginButtons}}
   {{> add_gif }}
   <div id="container" class="js-packery" data-packery-options'{ "itemSelector": ".gif", "gutter": 10}'>
     {{> gifs_list}}
   </div>
 </body>
+
+<template name="gifcount">
+    <h3 id="total_gifs">
+      {{count}} total Gifs and counting!
+    </h3>
+</template>
+
 <template name="gifs_list">
   {{#each gifs}}
     <img class='.gif' src={{src}}>
   {{/each}}
 </template>
+
 <template name="add_gif">
   {{#if currentUser}}
     <div id"add_gif">
@@ -22,7 +34,7 @@
       <input type='text' name='src' id='src' placeholder='Gif Source'><br>
       <label for='tags'>Tags:</label>
       <input type='text' name='tags' id='tags' placeholder='Tags'>
-      <input type='submit' id='submit_gif' value='Create'>
+      <input type='submit' id='submit_gif' value='Create' disabled>
     </div>
   {{else}}
     <div id="not_logged_in">

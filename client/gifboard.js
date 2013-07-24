@@ -10,7 +10,8 @@ Template.add_gif.events({
         Gifs.insert({
           user_id: Meteor.userId(),
           src: src,
-          tags: prepTags(tags)
+          tags: prepTags(tags),
+          created_at: Date.now()
         });
         template.find("#src").value = '';
         $("#tags").tagit("removeAll");
@@ -33,14 +34,10 @@ Template.gifcount.count = function(){
 };
 
 Template.gifs_list.gifs = function(){
-    return Gifs.find();
+    return Gifs.find({}, {sort: [['created_at', 'desc']]});
 };
 
 Template.gifs_list.rendered = function(){
-   var container = document.querySelector('#container');
-   $('#container').imagesLoaded( function() {
-     pckry = new Packery( container );
-   });
 };
 
 Template.add_gif.rendered = function(){

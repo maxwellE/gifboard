@@ -23,7 +23,8 @@ Meteor.startup(function () {
            Gifs.insert(
                {
                    src: gif.src,
-                   tags: gif.tags
+                   tags: gif.tags,
+                   created_at: Date.now()
                }
            );
        }

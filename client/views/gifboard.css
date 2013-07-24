@@ -1,29 +1,42 @@
 /* CSS declarations go here */
-html{
-  background: rgb(96,108,136); /* Old browsers */
-  background: -moz-linear-gradient(top,  rgba(96,108,136,1) 0%, rgba(63,76,107,1) 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(96,108,136,1)), color-stop(100%,rgba(63,76,107,1))); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
-  color: white;
+
+html,body{
 }
 
-body{
-  opacity: .9;
-}
-
-input#submit_gif{
-  opacity: 1;
+.container{
+  background: white;
 }
 
 div#header_div{
   text-align: center;
 }
 
-input.ui-autocomplete-input{
-  color: white !important;
-  font-size: 20px;
+div#header_div h1{
+  font-size: 73.5px;
+  margin-top: 43px;
+}
+
+div#header_div p.lead{
+  margin-top: 28px;
+}
+
+ul.tagit{
+  width: 28em;
+}
+
+input#submit_gif{
+  margin-right: 267px;
+}
+
+li#login div#login-buttons{
+  padding-top: 11px;
+  margin-right: 15px;
+}
+
+li#login div#login-buttons a.login-link-text{
+  color:black;
+}
+
+li#add_gif_container{
+  padding-right: 10px;
 }

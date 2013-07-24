@@ -30,7 +30,7 @@ Template.add_gif.events({
 
 Template.gifcount.count = function(){
     return Gifs.find().count(); 
-}
+};
 
 Template.gifs_list.gifs = function(){
     return Gifs.find();
@@ -41,11 +41,11 @@ Template.gifs_list.rendered = function(){
    $('#container').imagesLoaded( function() {
      pckry = new Packery( container );
    });
-}
+};
 
 Template.add_gif.rendered = function(){
-  $('#tags').tagit();
-}
+   $('#tags').tagit();
+};
 
 function prepTags(tags){
    return _.uniq(_.map(tags.split(','),function(str){ return str.trim();}));

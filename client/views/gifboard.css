@@ -1,8 +1,3 @@
-/* CSS declarations go here */
-
-html,body{
-}
-
 .container{
   background: white;
 }
@@ -20,8 +15,19 @@ div#header_div p.lead{
   margin-top: 28px;
 }
 
+div#add_gif{
+}
+
+div#add_gif input[type='submit'],div#add_gif input[type='button']{
+  width: 247px;
+}
+
+div#add_gif input[type='text']{
+  width: 233px;
+}
+
 ul.tagit{
-  width: 28em;
+  width: 235px; 
 }
 
 input#submit_gif{
@@ -29,7 +35,7 @@ input#submit_gif{
 }
 
 li#login div#login-buttons{
-  padding-top: 11px;
+  padding-top: 12px;
   margin-right: 15px;
 }
 

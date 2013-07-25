@@ -10,7 +10,6 @@
         {{> gifcount}}
     </div>
     {{> navbar }}
-    {{> add_gif }}
     <div id="gifs">
       {{> gifs_list}}
     </div>
@@ -25,7 +24,7 @@
          {{loginButtons}}
         </li>
         <li id='add_gif_container'>
-          <button class='btn btn-success'>Add Gif<i class="icon-plus icon-white"></i>
+          <button class='btn btn-success' id='add_gif'>Add Gif<i class="icon-plus icon-white"></i>
           </button>
         </li>
         <li class='active'>
@@ -57,12 +56,5 @@
 </template>
 
 <template name="add_gif">
-    <div id"add_gif">
-      <label for="src">Gif Source Link:</label>
-      <input type='text' name='src' id='src' placeholder='Gif Source'><br>
-      <label for='tags'>Tags:</label>
-      <input type='text' name='tags' id='tags' placeholder='Tags' class='input-xlarge'>
-      <input type='submit' id='submit_gif' value='Create' class='btn' disabled>
-      <input type='button' id='reset_fields' value='Reset Fields' class='btn btn-danger'>
-    </div>
+
 </template>

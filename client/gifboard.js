@@ -22,7 +22,11 @@ $( document ).ready(function() {
       });
       $("#src").val('');
       $("#tags").tagit("removeAll");
-      $('button#add_gif').popover('destroy')
+      $('button#add_gif').popover('hide')
+  });
+  $(document).on('click', '#reset_fields', function(e){
+      $("#src").val('');
+      $("#tags").tagit("removeAll");
   });
 });
 

@@ -3,6 +3,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD:client/views/index.html
   <div id="header_div">
       <h1>Welcome to Gifboard</h1>
       {{> gifcount}}
@@ -11,12 +12,51 @@
   {{loginButtons}}
   {{> add_gif }}
   {{> gifs_list}}
+=======
+    <a href="https://github.com/maxwellE/gifboard"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
+  <div class='container'>
+    <div id="header_div">
+        <h1>Welcome to Gifboard</h1>
+        {{> gifcount}}
+    </div>
+    {{> navbar }}
+    {{> add_gif }}
+    <div id="gifs">
+      {{> gifs_list}}
+    </div>
+  </div>
+>>>>>>> 14f7daa3e48d281794aac344102f50b167d2abcd:client/views/gifboard.html
 </body>
 
+<template name='navbar'>
+  <div class='navbar'>
+    <div class='navbar-inner'>
+      <ul class="nav">
+        <li id='login'>
+         {{loginButtons}}
+        </li>
+        <li id='add_gif_container'>
+          <button class='btn btn-success'>Add Gif<i class="icon-plus icon-white"></i>
+          </button>
+        </li>
+        <li class='active'>
+          <a href=''>All Gifs</a>
+        </li>
+        <li>
+          <a href=''>Your Gifs</a>
+        </li>
+        <li class='navbar-search'>
+          <input type="text" id='gif_search' class="search-query" placeholder="Search by tag (comma seperated)">
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+
 <template name="gifcount">
-    <h3 id="total_gifs">
+    <p class="lead">
       {{count}} total Gifs and counting!
-    </h3>
+    </p>
 </template>
 
 <template name="gifs_list">
@@ -28,17 +68,12 @@
 </template>
 
 <template name="add_gif">
-  {{#if currentUser}}
     <div id"add_gif">
       <label for="src">Gif Source Link:</label>
       <input type='text' name='src' id='src' placeholder='Gif Source'><br>
       <label for='tags'>Tags:</label>
-      <input type='text' name='tags' id='tags' placeholder='Tags'>
-      <input type='submit' id='submit_gif' value='Create' disabled>
+      <input type='text' name='tags' id='tags' placeholder='Tags' class='input-xlarge'>
+      <input type='submit' id='submit_gif' value='Create' class='btn' disabled>
+      <input type='button' id='reset_fields' value='Reset Fields' class='btn btn-danger'>
     </div>
-  {{else}}
-    <div id="not_logged_in">
-        Please log in to add gifs!
-    </div>
-  {{/if}}
 </template>

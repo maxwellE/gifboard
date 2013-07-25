@@ -1,0 +1,42 @@
+/* CSS declarations go here */
+
+html,body{
+}
+
+.container{
+  background: white;
+}
+
+div#header_div{
+  text-align: center;
+}
+
+div#header_div h1{
+  font-size: 73.5px;
+  margin-top: 43px;
+}
+
+div#header_div p.lead{
+  margin-top: 28px;
+}
+
+ul.tagit{
+  width: 28em;
+}
+
+input#submit_gif{
+  margin-right: 267px;
+}
+
+li#login div#login-buttons{
+  padding-top: 11px;
+  margin-right: 15px;
+}
+
+li#login div#login-buttons a.login-link-text{
+  color:black;
+}
+
+li#add_gif_container{
+  padding-right: 10px;
+}

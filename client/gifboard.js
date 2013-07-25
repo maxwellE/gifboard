@@ -27,7 +27,7 @@ Template.add_gif.events({
 
 Template.gifcount.count = function(){
     return Gifs.find().count(); 
-}
+};
 
 Template.gifs_list.gifs = function(){
     return Gifs.find({},{sort: {created_at: -1}});

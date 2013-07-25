@@ -50,7 +50,7 @@
 <template name="gifs_list">
 <div id="gifs">
   {{#each gifs}}
-    <img class='gif' src={{src}}>
+    <img class='gif' onerror="this.style.display='none'" src={{src}}>
   {{/each}}
   </div>
 </template>

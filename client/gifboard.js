@@ -1,7 +1,3 @@
-Meteor.startup(function() {
-});
-
-Meteor.subscribe("gifs");
 Template.add_gif.events({
     'click #submit_gif': function(e, template){
         var src,tags;
@@ -10,7 +6,8 @@ Template.add_gif.events({
         Gifs.insert({
           user_id: Meteor.userId(),
           src: src,
-          tags: prepTags(tags)
+          tags: prepTags(tags),
+          created_at: Date.now()
         });
         template.find("#src").value = '';
         $("#tags").tagit("removeAll");
@@ -33,20 +30,18 @@ Template.gifcount.count = function(){
 }
 
 Template.gifs_list.gifs = function(){
-    return Gifs.find();
+    return Gifs.find({},{sort: {created_at: -1}});
 };
 
 Template.gifs_list.rendered = function(){
-   var container = document.querySelector('#container');
-   $('#container').imagesLoaded( function() {
-     pckry = new Packery( container );
-   });
 }
 
 Template.add_gif.rendered = function(){
-  $('#tags').tagit();
+    $('#tags').tagit();
 }
 
 function prepTags(tags){
-   return _.uniq(_.map(tags.split(','),function(str){ return str.trim();}));
+   return _.uniq(_.reject((_.map(tags.split(','),function(str){ return str.trim();})), function(str){
+      return str.trim() === ""; 
+   }));
 }

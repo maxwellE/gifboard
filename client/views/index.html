@@ -10,9 +10,7 @@
   <a href="https://github.com/maxwellE/gifboard"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
   {{loginButtons}}
   {{> add_gif }}
-  <div id="container" class="js-packery" data-packery-options'{ "itemSelector": ".gif", "gutter": 10}'>
-    {{> gifs_list}}
-  </div>
+  {{> gifs_list}}
 </body>
 
 <template name="gifcount">
@@ -22,9 +20,11 @@
 </template>
 
 <template name="gifs_list">
+<div id="gifs">
   {{#each gifs}}
-    <img class='.gif' src={{src}}>
+    <img class='gif' src={{src}}>
   {{/each}}
+  </div>
 </template>
 
 <template name="add_gif">

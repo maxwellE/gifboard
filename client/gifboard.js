@@ -2,7 +2,6 @@ $( document ).ready(function() {
   $(document).on("keyup", "#src",function(e){
       var src, regex;
       src = $("#src").val();
-      console.log(src);
       regex = /.+\.gif$/;
       if(regex.test(src)){
          $('#submit_gif').prop("disabled", false);
@@ -40,7 +39,13 @@ Template.add_gif.events({
 
 Template.navbar.events({
     'click button#add_gif': function(e, template){
-      $('#tags').tagit();
+      var allTags = Tags.find().fetch();
+      var available = _.map(allTags, function(tag){ return tag.name; })
+      console.log(available, "HI");
+      $("#tags").tagit({
+          availableTags: available,
+          singleField: true
+      });
     }
 });
 

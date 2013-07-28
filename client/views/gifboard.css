@@ -2,6 +2,10 @@
   background: white;
 }
 
+h1{
+  line-height: 61px;
+}
+
 div#header_div{
   text-align: center;
 }
@@ -12,7 +16,7 @@ div#header_div h1{
 }
 
 div#header_div p.lead{
-  margin-top: 28px;
+  margin-top: 13px;
 }
 
 div#add_gif{
@@ -45,4 +49,23 @@ li#login div#login-buttons a.login-link-text{
 
 li#add_gif_container{
   padding-right: 10px;
+}
+
+li div.well.switch.candy{
+  margin-top: 5px;
+  margin-bottom: -10px;
+  margin-right: 10px;
+  background-color: black;
+}
+
+li div.well.switch.candy label{
+  color: white !important;
+}
+
+span.slide-button.btn{
+  margin-top: 0px !important;
+}
+
+div.well.switch{
+  width: 193px;
 }

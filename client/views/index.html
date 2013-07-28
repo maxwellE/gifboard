@@ -10,9 +10,7 @@
         {{> gifcount}}
     </div>
     {{> navbar }}
-    <div id="gifs">
-      {{> gifs_list}}
-    </div>
+    {{> gifs_list}}
   </div>
 </body>
 
@@ -27,18 +25,27 @@
           <button class='btn btn-success' id='add_gif'>Add Gif<i class="icon-plus icon-white"></i>
           </button>
         </li>
-        <li class='active'>
-          <a href=''>All Gifs</a>
-        </li>
-        <li>
-          <a href=''>Your Gifs</a>
-        </li>
-        <li class='navbar-search'>
+         {{#if currentUser}}
+             {{> user_gif_toggle }}
+         {{/if}}
+         <li class='navbar-search'>
           <input type="text" id='gif_search' class="search-query" placeholder="Search by tag (comma seperated)">
         </li>
       </ul>
     </div>
   </div>
+</template>
+
+<template name='user_gif_toggle'>
+  <li>
+      <div class="well switch candy">
+      <input id="all_gifs" name="view" type="radio" checked>
+      <label for="all_gifs" onclick="">All Gifs</label>
+      <input id="your_gifs" name="view" type="radio"> 
+      <label for="your_gifs" onclick="">Your Gifs</label>
+      <span class="slide-button btn"></span>
+     </div>
+  </li>
 </template>
 
 <template name="gifcount">
@@ -48,13 +55,9 @@
 </template>
 
 <template name="gifs_list">
-<div id="gifs">
-  {{#each gifs}}
-    <img class='gif' onerror="this.style.display='none'" src={{src}}>
-  {{/each}}
+  <div id="gifs">
+    {{#each gifs}}
+        <img class='gif' onerror="this.style.display='none'" src={{src}}>
+    {{/each}}
   </div>
-</template>
-
-<template name="add_gif">
-
 </template>

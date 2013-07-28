@@ -1,8 +1,16 @@
+Meteor.startup(function () {
+  Meteor.subscribe("gifs");
+  Session.setDefault('your_gifs_only', false);
+});
+
+Meteor.logout(function(err) {
+   Session.set("your_gifs_only",false);
+});
+
 $( document ).ready(function() {
   $(document).on("keyup", "#src",function(e){
       var src, regex;
       src = $("#src").val();
-      console.log(src);
       regex = /.+\.gif$/;
       if(regex.test(src)){
          $('#submit_gif').prop("disabled", false);
@@ -22,7 +30,7 @@ $( document ).ready(function() {
       });
       $("#src").val('');
       $("#tags").tagit("removeAll");
-      $('button#add_gif').popover('hide')
+      $('button#add_gif').popover('hide');
   });
   $(document).on('click', '#reset_fields', function(e){
       $("#src").val('');
@@ -30,17 +38,19 @@ $( document ).ready(function() {
   });
 });
 
-Template.add_gif.events({
-    'click #submit_gif': function(e, template){
-             },
-     'keyup, change #src': function(e, template){
-              }
-   }
-);
-
 Template.navbar.events({
     'click button#add_gif': function(e, template){
       $('#tags').tagit();
+    }
+});
+
+Template.user_gif_toggle.events({
+    'change input': function(e, template){
+      if(template.find('input#your_gifs').checked){
+        Session.set('your_gifs_only', true);
+      }else{
+        Session.set('your_gifs_only', false);
+      }
     }
 });
 
@@ -57,7 +67,11 @@ Template.gifcount.count = function(){
 };
 
 Template.gifs_list.gifs = function(){
-    return Gifs.find({},{sort: {created_at: -1}});
+      if(Session.get('your_gifs_only')){
+          return Gifs.find({user_id: Meteor.userId()}, {sort: {created_at: -1}});
+      }else{
+          return Gifs.find({},{sort: {created_at: -1}});
+      }
 };
 
 function prepTags(tags){

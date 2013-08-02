@@ -1,47 +1,50 @@
 Meteor.startup(function () {
   Meteor.subscribe("gifs");
+  Meteor.subscribe('tags');
   Session.setDefault('your_gifs_only', false);
 });
 
-Meteor.logout(function(err) {
-   Session.set("your_gifs_only",false);
-});
-
-$( document ).ready(function() {
-  $(document).on("keyup", "#src",function(e){
-      var src, regex;
-      src = $("#src").val();
-      regex = /.+\.gif$/;
-      if(regex.test(src)){
-         $('#submit_gif').prop("disabled", false);
-      }else{
-         $('#submit_gif').prop("disabled", true);
-      }
-   });
-  $(document).on('click', '#submit_gif', function(e){
-      var src,tags;
-      src = $("#src").val();
-      tags = $("#tags").val();
-      Gifs.insert({
-        user_id: Meteor.userId(),
-        src: src,
-        tags: prepTags(tags),
-        created_at: Date.now()
-      });
-      $("#src").val('');
-      $("#tags").tagit("removeAll");
-      $('button#add_gif').popover('hide');
-  });
-  $(document).on('click', '#reset_fields', function(e){
-      $("#src").val('');
-      $("#tags").tagit("removeAll");
-  });
-});
-
-Template.navbar.events({
-    'click button#add_gif': function(e, template){
-      $('#tags').tagit();
+Template.add_gif_form.rendered = function(){
+  Meteor.call('getTags',function(error, result){
+    if(result){
+        $("#tags").tagsManager({
+            typeahead: true,
+            typeaheadSource: result
+        });
     }
+    else{
+        $("#tags").tagsManager({
+            typeahead: true,
+            typeaheadSource: result
+        });
+    }
+  });
+};
+
+Template.add_gif_form.events({
+  'keyup #src': function(e,template){
+      var src, regex;
+      src = template.find("#src").value;
+      regex = /^http.+\.gif$/;
+      if(regex.test(src)){
+         $('#add_gif').prop("disabled", false);
+      }else{
+         $('#add_gif').prop("disabled", true);
+      }
+    },
+  'click button#add_gif': function(e, template){
+      var src,tags,existing_gif;
+      src = template.find("#src").value;
+      tags = template.find("#tags").value;
+       Gifs.insert({
+         src: src,
+         tags: prepTags(tags),
+         created_at: Date.now()
+       });
+      template.find('#src').value = '';
+      template.find('#tags').value = '';
+      $('#add_gif').prop("disabled", true);
+  }
 });
 
 Template.user_gif_toggle.events({
@@ -53,14 +56,6 @@ Template.user_gif_toggle.events({
       }
     }
 });
-
-Template.navbar.rendered = function(){
-    $('button#add_gif').popover({
-      html: true,
-      placement: 'bottom',
-      title: 'Add Gif',
-      content: "<div id='add_gif'><label for='src'>Gif Source Link:</label><input type='text' name='src' id='src' placeholder='Gif Source'><br><label for='tags'>Tags:</label><input type='text' name='tags' id='tags' placeholder='Tags' class='input-xlarge'><input type='submit' id='submit_gif' value='Create' class='btn' disabled><input type='button' id='reset_fields' value='Reset Fields' class='btn btn-danger'></div>"});
-};
 
 Template.gifcount.count = function(){
     return Gifs.find().count(); 

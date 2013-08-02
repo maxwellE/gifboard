@@ -4,12 +4,11 @@
 # but you can also edit it by hand.
 
 preserve-inputs
-accounts-ui
-accounts-facebook
 madewith
-accounts-password
 handlebars
 underscore
 jquery
 spiderable
 bootstrap
+appcache
+audit-argument-checks

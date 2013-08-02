@@ -6,6 +6,14 @@ h1{
   line-height: 61px;
 }
 
+form{
+  margin-top: -17px;
+}
+
+form button#add_gif{
+  font-size: 23px;
+}
+
 div#header_div{
   text-align: center;
 }

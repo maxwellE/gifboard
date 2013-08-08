@@ -9,15 +9,42 @@
         <h1>Welcome to Gifboard</h1>
         {{> gifcount}}
     </div>
-    {{> add_gif_form}}
+   {{> actions }}
+   </div>
   </div>
   {{> gifs_list}}
 </body>
 
+<template name='actions'>
+ <div class="tabbable">
+         <ul class="nav nav-tabs">
+           <li class="active"><a href="#add_gif_pane" id="add_gif_pane_link" data-toggle="tab">Add Gif</a></li>
+           <li><a href="#search_pane" id="search_pane_link"data-toggle="tab">Search</a></li>
+         </ul>
+         <div class="tab-content">
+           <div class="tab-pane active" id="add_gif_pane">
+              {{> add_gif_form}}
+           </div>
+           <div class="tab-pane" id="search_pane">
+             {{> search_form }}
+       </div>
+  </div>
+</template>
+
+<template name='search_form'>
+    <form class='form-horizontal'>
+        <div class="control-group">
+              <label class='control-label'>Tags</label>
+          <div class="controls">
+             <input name='tags' class="tm-input" placeholder='Tags' data-provide="typeahead" type="text" id='search_tags'>
+          </div>
+        </div>
+    </form>
+    <hr>
+</template>
+
 <template name='add_gif_form'>
     <form class='form-horizontal'>
-      <fieldset>
-        <legend>Add Gif</legend>
           <div class="control-group">
               <label class='control-label'>Gif Source Link</label>
           <div class="controls">
@@ -27,7 +54,7 @@
         <div class="control-group">
               <label class='control-label'>Tags</label>
           <div class="controls">
-             <input name='tags' class="tm-input" data-provide="typeahead" type="text" id='tags'>
+             <input name='tags' class="tm-input" placeholder='Tags' data-provide="typeahead" type="text" id='tags'>
           </div>
         </div>
         <div class="control-group">
@@ -35,21 +62,8 @@
             <button class="btn btn-large btn-success input-xxlarge" id='add_gif' type="button" disabled>Add Gif</button>
           </div>
         </div>
-      </fieldset>
     </form>
     <hr>
-</template>
-
-<template name='user_gif_toggle'>
-  <li>
-      <div class="well switch candy">
-      <input id="all_gifs" name="view" type="radio" checked>
-      <label for="all_gifs" onclick="">All Gifs</label>
-      <input id="your_gifs" name="view" type="radio"> 
-      <label for="your_gifs" onclick="">Your Gifs</label>
-      <span class="slide-button btn"></span>
-     </div>
-  </li>
 </template>
 
 <template name="gifcount">

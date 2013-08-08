@@ -21,10 +21,12 @@ Gifs.deny({
       existing_gifs = Gifs.find({src: doc.src}).fetch();
       if(existing_gifs){
         var existing_gifs_tags = _.map(existing_gifs,function(gif){
-            console.log(gif);
             return gif.tags;
         });
         doc.tags = _.union(_.flatten(existing_gifs_tags), doc.tags);
+        doc.tags = _.reject(doc.tags,function(e){
+          return e.trim() === "";
+        });
         Gifs.remove({src: doc.src});
       }
       return false;

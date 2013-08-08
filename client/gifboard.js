@@ -1,28 +1,32 @@
 Meteor.startup(function () {
   Meteor.subscribe("gifs");
   Meteor.subscribe('tags');
-  Session.setDefault('your_gifs_only', false);
+  Session.setDefault('allGifs', true);
 });
 
-Template.add_gif_form.rendered = function(){
+function setupTagManager(target){
   Meteor.call('getTags',function(error, result){
     if(result){
-        $("#tags").tagsManager({
+        $(target).tagsManager({
             typeahead: true,
-            typeaheadSource: result
+            typeaheadSource: result,
+            hiddenTagListId: 'hidden-tags'
         });
     }
     else{
-        $("#tags").tagsManager({
-            typeahead: true,
-            typeaheadSource: result
+        $(target).tagsManager({
+            hiddenTagListId: 'hidden-tags'
         });
     }
   });
+}
+
+Template.add_gif_form.rendered = function(){
+    setupTagManager('#tags');
 };
 
 Template.add_gif_form.events({
-  'keyup #src': function(e,template){
+  'input, paste #src': function(e,template){
       var src, regex;
       src = template.find("#src").value;
       regex = /^http.+\.gif$/;
@@ -35,26 +39,37 @@ Template.add_gif_form.events({
   'click button#add_gif': function(e, template){
       var src,tags,existing_gif;
       src = template.find("#src").value;
-      tags = template.find("#tags").value;
+      tags = $.map( $('span.tm-tag span') , function(e,i){ return $(e).text();});
        Gifs.insert({
          src: src,
-         tags: prepTags(tags),
+         tags: tags,
          created_at: Date.now()
        });
       template.find('#src').value = '';
+      $("#tags").tagsManager('empty');
       template.find('#tags').value = '';
       $('#add_gif').prop("disabled", true);
   }
 });
 
-Template.user_gif_toggle.events({
-    'change input': function(e, template){
-      if(template.find('input#your_gifs').checked){
-        Session.set('your_gifs_only', true);
-      }else{
-        Session.set('your_gifs_only', false);
-      }
-    }
+Template.search_form.rendered = function(){
+    setupTagManager('#search_tags');
+};
+
+Template.search_form.events({
+  'keyup #search_tags': function(e, template){
+    var search_tags = $.map( $('div#search_pane span.tm-tag span') , function(e,i){ return $(e).text();});
+    Session.set('tags',search_tags);
+  }
+}); 
+
+Template.actions.events({
+  'click a#search_pane_link': function(e, template){
+      Session.set('allGifs', false);
+  },
+  'click a#add_gif_pane_link': function(e, template){
+      Session.set('allGifs', true);
+  }
 });
 
 Template.gifcount.count = function(){
@@ -62,15 +77,15 @@ Template.gifcount.count = function(){
 };
 
 Template.gifs_list.gifs = function(){
-      if(Session.get('your_gifs_only')){
-          return Gifs.find({user_id: Meteor.userId()}, {sort: {created_at: -1}});
-      }else{
-          return Gifs.find({},{sort: {created_at: -1}});
-      }
+  if(Session.get('allGifs')){
+    return Gifs.find({},{sort: {created_at: -1}});
+  }
+  else{
+    var search_tags = Session.get('tags');
+    if(_.isEmpty(search_tags)){
+        return Gifs.find({},{sort: {created_at: -1}});
+    }else{
+        return Gifs.find({ tags: { $in: search_tags } });
+    }
+  }
 };
-
-function prepTags(tags){
-   return _.uniq(_.reject((_.map(tags.split(','),function(str){ return str.trim();})), function(str){
-      return str.trim() === ""; 
-   }));
-}

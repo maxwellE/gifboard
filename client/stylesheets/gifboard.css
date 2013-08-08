@@ -6,10 +6,6 @@ h1{
   line-height: 61px;
 }
 
-form{
-  margin-top: -17px;
-}
-
 form button#add_gif{
   font-size: 23px;
 }
@@ -25,9 +21,6 @@ div#header_div h1{
 
 div#header_div p.lead{
   margin-top: 13px;
-}
-
-div#add_gif{
 }
 
 div#add_gif input[type='submit'],div#add_gif input[type='button']{

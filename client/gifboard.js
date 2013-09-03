@@ -54,13 +54,18 @@ Template.add_gif_form.events({
 
 Template.search_form.rendered = function(){
     setupTagManager('#search_tags');
+    // $(document).on(events, selector, data, handler);
+    $(document).on('click', 'a.tm-tag-remove',function(e){
+      var search_tags = $.map( $('div#search_pane span.tm-tag span') , function(e,i){ return $(e).text();});
+      Session.set('tags',search_tags);
+    });
 };
 
 Template.search_form.events({
   'keyup #search_tags': function(e, template){
     var search_tags = $.map( $('div#search_pane span.tm-tag span') , function(e,i){ return $(e).text();});
     Session.set('tags',search_tags);
-  }
+  },
 }); 
 
 Template.actions.events({

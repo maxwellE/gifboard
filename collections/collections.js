@@ -1,2 +1,2 @@
-Gifs = new Meteor.SmartCollection("gifs");
-Tags = new Meteor.SmartCollection('tags');
+Gifs = new Meteor.Collection("gifs");
+Tags = new Meteor.Collection('tags');

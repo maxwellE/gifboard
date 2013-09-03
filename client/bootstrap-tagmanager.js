@@ -40,7 +40,7 @@
       AjaxPush: null,
       AjaxPushAllTags: null,
       AjaxPushParameters: null,
-      delimiters: [9,13,44], // tab, enter, comma
+      delimiters: [13,44], // tab, enter, comma
       backspace: [8],
       maxTags: 0,
       hiddenTagListName: null,
